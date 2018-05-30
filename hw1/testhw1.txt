@@ -1,0 +1,79 @@
+(TREE-CONTAINS 3 '((1 2 3) 7 8)) returns T
+(TREE-CONTAINS 4 '((1 2 3) 7 8)) returns NIL
+(TREE-CONTAINS 3 3) returns T
+(TREE-CONTAINS 3 5) returns NIL
+
+(TREE-MAX '((1 2 3) 7 8)) returns 8 
+(TREE-MAX 1) returns 1
+(TREE-MAX '((1 2 3) 7 (8 9 ((10 11) 12 (13 14 15))))) returns 15
+
+(TREE-ORDER 3) returns (3)
+(TREE-ORDER '((1 2 3) 7 8)) returns (1 2 3 7 8) 
+(TREE-ORDER '((1 2 3) 7 (8 9 ((10 11 12) 13 (14 15 16))))) returns (1 2 3 7 8 9 10 11 12 13 14 15 16)
+
+
+(SUB-LIST '(a b c d) 0 3) returns (a b c) 
+(SUB-LIST '(a b c d) 3 1) returns (d) 
+(SUB-LIST '(a b c d) 2 0) returns NIL 
+(SUB-LIST '(a b c d) 2 3) returns NIL
+(SUB-LIST '(a b) 0 2) returns (a b)
+(SUB-LIST '(a b) 0 3) returns NIL
+(SUB-LIST '(a b) 1 2) returns NIL
+(SUB-LIST '(a b) 1 1) returns (b)
+(SUB-LIST '() 0 0) returns NIL
+(SUB-LIST '(a b) 1 0) returns NIL
+
+
+(SPLIT-LIST '(a b c d)) returns ((a b) (c d)) 
+(SPLIT-LIST '(a b c d e)) returns ((a b) (c d e))
+(SPLIT-LIST '(a b c d e f)) returns ((a b c) (d e f)) 
+(SPLIT-LIST '(a b c)) returns ((a) (b c)) 
+(SPLIT-LIST '(a b)) returns ((a) (b)) 
+(SPLIT-LIST '(a)) returns (NIL (a)) 
+(SPLIT-LIST '()) returns (NIL NIL)
+
+(BTREE-HEIGHT 1) returns 0
+(BTREE-HEIGHT '(1 2)) returns 1
+(BTREE-HEIGHT '(1 (2 3))) returns 2  
+(BTREE-HEIGHT '((1 2) 3)) returns 2 
+(BTREE-HEIGHT '((1 2) (3 4))) returns 2  
+(BTREE-HEIGHT '((1 (2 3)) ((4 5) (6 7)))) returns 3  
+(BTREE-HEIGHT '((1 (2 3)) (4 6))) returns 3
+(BTREE-HEIGHT '(((1 2) (3 4)) ((5 6) (7 8)))) returns 3
+
+(LIST2BTREE '(1)) returns 1  
+(LIST2BTREE '(1 2)) returns (1 2)  
+(LIST2BTREE '(1 2 3)) returns (1 (2 3))   
+(LIST2BTREE '(1 2 3 4)) returns ((1 2) (3 4))  
+(LIST2BTREE '(1 2 3 4 5)) returns ((1 2) (3 (4 5)))  
+(LIST2BTREE '(1 2 3 4 5 6)) returns ((1 (2 3)) (4 (5 6))) 
+(LIST2BTREE '(1 2 3 4 5 6 7)) returns ((1 (2 3)) ((4 5) (6 7)))  
+(LIST2BTREE '(1 2 3 4 5 6 7 8)) returns (((1 2) (3 4)) ((5 6) (7 8))) 
+(LIST2BTREE '(1 2 3 4 5 6 7 8 9)) returns (((1 2) (3 4)) ((5 6) (7 (8 9)))) 
+
+(BTREE2LIST 1) returns (1) 
+(BTREE2LIST '(1 2)) returns (1 2)
+(BTREE2LIST '(1 (2 3))) returns (1 2 3)
+(BTREE2LIST '((1 2) (3 4))) returns (1 2 3 4)
+(BTREE2LIST '((1 2) (3 (4 5)))) returns (1 2 3 4 5)
+(BTREE2LIST '((1 (2 3)) (4 (5 6)))) returns (1 2 3 4 5 6)
+(BTREE2LIST '((1 (2 3)) ((4 5) (6 7)))) returns (1 2 3 4 5 6 7) 
+(BTREE2LIST '(((1 2) (3 4)) ((5 6) (7 8)))) returns (1 2 3 4 5 6 7 8)
+(BTREE2LIST '(((1 2) (3 4)) ((5 6) (7 (8 9))))) returns (1 2 3 4 5 6 7 8 9)
+
+(IS-SAME NIL NIL) returns T
+(IS-SAME NIL '(1)) returns NIL
+(IS-SAME '(1 (2 3)) NIL) returns NIL
+(IS-SAME 1 1) returns T
+(IS-SAME 1 2) returns NIL
+(IS-SAME 1 '(1)) returns NIL
+(IS-SAME '((1) (2) (3)) '(1 2 3)) returns NIL
+(IS-SAME '(1 2 3) '((1) (2) (3))) returns NIL
+(IS-SAME '(1 1 3) '(1 2 3)) returns NIL
+(IS-SAME '(1 1 1) '(1 1)) returns NIL
+(IS-SAME '(0 1 1) '(1 1)) returns NIL
+(IS-SAME '(1 2 4) '(1 2 3)) returns NIL
+(IS-SAME '((1 2 3) 7 8) '((1 2 3) 7 8)) returns T
+(IS-SAME '(1 2 3 7 8) '((1 2 3) 7 8)) returns NIL
+(IS-SAME '(1 2 3 7 8) '(1 2 (3) 7 8)) returns NIL
+(IS-SAME '(((1 2) (3 4)) ((5 6) (7 (8 9)))) '(((1 2) (3 4)) ((5 6) (7 (8 9))))) returns T
